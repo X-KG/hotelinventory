@@ -9,6 +9,6 @@ import { Component } from '@angular/core';
 })
 export class RoomsComponent {
 
-  hotelName = 'Oyo Rooms';
+  hotelName = 'Hilton Hotel';
 
 }
