@@ -9,6 +9,9 @@
         <th>Room CheckinTime</th>
         <th>Room CheckoutTime</th>
         <th>Room Rating</th>
+        <th>
+            Select Room
+        </th>
     </tr>
     @for (room of rooms; track $index) {
     <tr [classList]="$index % 2 === 0 ? 'even' : 'odd'">
@@ -21,6 +24,13 @@
         <td>{{ room.checkinTime | date }}</td>
         <td>{{ room.checkoutTime | date : 'short' }}</td>
         <td>{{ room.rating | number }}</td>
+        <td>
+            <button
+                class="btn btnm-primary"
+                (click)="selectRoom(room)"
+                >
+                    Select</button>
+        </td>
     </tr>
 
     }

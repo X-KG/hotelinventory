@@ -1,2 +1,35 @@
-<p>rooms works!</p>
-<!-- <h1>This is {{hotelName}}</h1> -->
+<h1>Welcome to {{hotelName}} </h1>
+<div [hidden]="hideRooms">
+    Number of Rooms:
+    <div  [style]="{'color': rooms.availableRooms ? 'green' : 'red'}" 
+    [innerText]="numberOfRooms"></div>
+</div>
+
+<div>
+
+    <!-- {{ rooms.availableRooms ?? 'No rooms available' }} -->
+    <!-- {{ roomList | json}} -->
+
+    <div>
+        @if(selectedRoom){
+            {{ selectedRoom | json }}
+        }
+    </div>
+
+    @if(rooms.availableRooms > 0 ){
+    Available Rooms {{rooms.availableRooms}}
+
+    <hinv-rooms-list [rooms]="roomList"
+    (selectedRoom)="selectRoom($event)"></hinv-rooms-list>
+    Room List
+    <!-- {{roomList}} -->
+
+    }
+
+
+
+    @else {
+    No Rooms
+    }
+</div>
+    <button (click)="toggle()">Toggle</button>
