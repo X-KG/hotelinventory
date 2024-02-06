@@ -1,4 +1,10 @@
-<h1>Welcome to {{hotelName}} </h1>
+<!-- <h1>Welcome to {{hotelName}} </h1> -->
+<hinv-header></hinv-header>
+<hinv-header></hinv-header>
+<hinv-header></hinv-header>
+<hinv-header></hinv-header>
+<hinv-header></hinv-header>
+<hinv-header></hinv-header>
 <div [hidden]="hideRooms">
     Number of Rooms:
     <div  [style]="{'color': rooms.availableRooms ? 'green' : 'red'}" 
@@ -16,12 +22,18 @@
         }
     </div>
 
-    @if(rooms.availableRooms > 0 ){
+    <div>
+        <button (click)="addRoom()">Add Room</button>
+    </div>
+
+    @if(hideRooms){
     Available Rooms {{rooms.availableRooms}}
 
-    <hinv-rooms-list [rooms]="roomList"
+    <br/>
+
+    <hinv-rooms-list [rooms]="roomList" [title]="title"
     (selectedRoom)="selectRoom($event)"></hinv-rooms-list>
-    Room List
+
     <!-- {{roomList}} -->
 
     }

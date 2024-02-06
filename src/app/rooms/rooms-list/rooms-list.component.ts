@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { RoomList } from '../rooms';
 import { CurrencyPipe, DatePipe, DecimalPipe, JsonPipe, LowerCasePipe, PercentPipe, SlicePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
 
@@ -8,21 +8,36 @@ import { CurrencyPipe, DatePipe, DecimalPipe, JsonPipe, LowerCasePipe, PercentPi
   standalone: true,
   imports: [DatePipe, UpperCasePipe, LowerCasePipe, TitleCasePipe, CurrencyPipe, PercentPipe, JsonPipe, DecimalPipe, SlicePipe],
   templateUrl: './rooms-list.component.html',
-  styleUrl: './rooms-list.component.scss'
+  styleUrl: './rooms-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RoomsListComponent implements OnInit {
+export class RoomsListComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() rooms: RoomList[] = [];
 
+  @Input() title: string = '';
+
   @Output() selectedRoom = new EventEmitter<RoomList>();
-  constructor() {}
+  constructor() { }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    if(changes['title']) {
+      this.title = changes['title'].currentValue.toUpperCase();
+    }
+  }
 
 
   ngOnInit(): void {
-    
+
   }
 
-  selectRoom(room: RoomList){
+  selectRoom(room: RoomList) {
     this.selectedRoom.emit(room);
   }
+
+  ngOnDestroy(): void {
+    console.log('on destroy is called')
+  }
+
 }
+  
