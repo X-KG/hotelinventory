@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { RoomList } from '../rooms';
-import { APP_SERVICE_CONFIG, APP_CONFIG } from '../../AppConfig/appconfig.service';
+import { APP_SERVICE_CONFIG } from '../../AppConfig/appconfig.service';
 import { AppConfig } from '../../AppConfig/appconfig.interface';
 
 @Injectable({
