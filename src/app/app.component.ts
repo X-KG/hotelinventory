@@ -7,6 +7,7 @@ import { EmployeeComponent } from "./employee/employee.component";
 import { LoggerService } from './logger.service';
 import { localStorageToken } from './localstorage.token';
 
+
 @Component({
     selector: 'hinv-root',
     standalone: true,
@@ -29,7 +30,7 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.loggerService?.log('AppComponent.ngOnInit()')
-    this.name.nativeElement.innerText = "Hilton Hotel";
+    // this.name.nativeElement.innerText = "Hilton Hotel";
     this.localStorage.setItem('name', 'Hilton Hotel');
   }
   // @ViewChild('user', { read: ViewContainerRef }) vcr!: ViewContainerRef;
