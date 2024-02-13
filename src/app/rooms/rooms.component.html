@@ -1,10 +1,12 @@
 <!-- <h1>Welcome to {{hotelName}} </h1> -->
 <hinv-header></hinv-header>
+<!-- <hinv-header></hinv-header>
 <hinv-header></hinv-header>
 <hinv-header></hinv-header>
 <hinv-header></hinv-header>
-<hinv-header></hinv-header>
-<hinv-header></hinv-header>
+<hinv-header></hinv-header> -->
+
+<!-- {{rooms$ | async | json}} -->
 <div [hidden]="hideRooms">
     Number of Rooms:
     <div  [style]="{'color': rooms.availableRooms ? 'green' : 'red'}" 
@@ -26,12 +28,13 @@
         <button (click)="addRoom()">Add Room</button>
     </div>
 
-    @if(hideRooms){
+    
+    @if(rooms$ | async){
     Available Rooms {{rooms.availableRooms}}
 
     <br/>
 
-    <hinv-rooms-list [rooms]="roomList" [title]="title"
+    <hinv-rooms-list [rooms]="rooms$ | async" [title]="title"
     (selectedRoom)="selectRoom($event)"></hinv-rooms-list>
 
     <!-- {{roomList}} -->

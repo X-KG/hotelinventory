@@ -6,6 +6,7 @@ import { ContainerComponent } from "./container/container.component";
 import { EmployeeComponent } from "./employee/employee.component";
 import { LoggerService } from './logger.service';
 import { localStorageToken } from './localstorage.token';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { localStorageToken } from './localstorage.token';
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [CommonModule, RouterOutlet, RoomsComponent, ContainerComponent, EmployeeComponent]
+    imports: [CommonModule, RouterOutlet, RoomsComponent, ContainerComponent, EmployeeComponent, HttpClientModule]
 })
 export class AppComponent implements OnInit {
   title = 'hotelinventoryapp';

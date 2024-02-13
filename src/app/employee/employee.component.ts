@@ -1,10 +1,11 @@
 import { Component, OnInit, Self } from '@angular/core';
 import { RoomsService } from '../rooms/services/rooms.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'hinv-employee',
   standalone: true,
-  imports: [],
+  imports: [HttpClientModule],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.scss',
   providers: [RoomsService]

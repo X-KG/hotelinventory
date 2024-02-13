@@ -1,21 +1,21 @@
 import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnDestroy, OnInit, QueryList, SkipSelf, ViewChild, ViewChildren } from '@angular/core';
 import { Room, RoomList } from './rooms';
-import { DatePipe, UpperCasePipe, LowerCasePipe, TitleCasePipe, CurrencyPipe, PercentPipe, JsonPipe, DecimalPipe, SlicePipe } from '@angular/common';
+import { DatePipe, UpperCasePipe, LowerCasePipe, TitleCasePipe, CurrencyPipe, PercentPipe, JsonPipe, DecimalPipe, SlicePipe, AsyncPipe } from '@angular/common';
 import { RoomsListComponent } from "./rooms-list/rooms-list.component";
 import { HeaderComponent } from "../header/header.component";
 import { RoomsService } from './services/rooms.service';
 import { HttpClientModule, HttpEventType } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'hinv-rooms',
   standalone: true,
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.scss',
-  imports: [DatePipe, UpperCasePipe, LowerCasePipe, TitleCasePipe, CurrencyPipe, PercentPipe, JsonPipe, DecimalPipe, SlicePipe, RoomsListComponent, HeaderComponent, HttpClientModule]
+  imports: [DatePipe, UpperCasePipe, LowerCasePipe, TitleCasePipe, AsyncPipe, CurrencyPipe, PercentPipe, JsonPipe, DecimalPipe, SlicePipe, RoomsListComponent, HeaderComponent, HttpClientModule]
 
 })
-export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterViewChecked {
+export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterViewChecked, OnDestroy {
   hotelName = 'Hilton Hotel';
 
   numberOfRooms = 10;
@@ -50,6 +50,10 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>;
 
   totalBytes = 0;
+
+  subscription !: Subscription;
+
+  rooms$ = this.roomsService.getRooms$;
 
   constructor(@SkipSelf() private roomsService: RoomsService) { }
 
@@ -88,9 +92,9 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
       error: (err) => console.log(err)
     });
     this.stream.subscribe((data) => console.log(data));
-    this.roomsService.getRooms().subscribe(rooms => {
-      this.roomList = rooms;
-    });
+    // this.subscription = this.roomsService.getRooms$.subscribe(rooms => {
+    //   this.roomList = rooms;
+    // });
     // console.log(this.headerComponent);
 
   }
@@ -168,6 +172,14 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     this.roomsService.delete('3').subscribe((data) => {
       this.roomList = data;
     });
+  }
+
+
+
+  ngOnDestroy(){
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
   }
 
 

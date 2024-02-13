@@ -17,7 +17,7 @@ export class ContainerComponent implements AfterContentInit {
   @ContentChild(EmployeeComponent) employee!: EmployeeComponent;
 
 
-  constructor(@Host() private roomsService: RoomsService){
+  constructor(@Host() private roomsSer: RoomsService){
     
   }
 
