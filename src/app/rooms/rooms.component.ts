@@ -5,7 +5,7 @@ import { RoomsListComponent } from "./rooms-list/rooms-list.component";
 import { HeaderComponent } from "../header/header.component";
 import { RoomsService } from './services/rooms.service';
 import { HttpClientModule, HttpEventType } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, catchError, map, of } from 'rxjs';
 
 @Component({
   selector: 'hinv-rooms',
@@ -53,7 +53,21 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
   subscription !: Subscription;
 
-  rooms$ = this.roomsService.getRooms$;
+  error$ = new Subject<string>();
+
+  getError$ = this.error$.asObservable();
+
+  rooms$ = this.roomsService.getRooms$.pipe(
+    catchError((err) => {
+      // console.log(err);
+      this.error$.next(err.message);
+      return of([]);
+    })
+  );
+
+  roomsCount$ = this.roomsService.getRooms$.pipe(
+    map((rooms) => rooms.length)
+  )
 
   constructor(@SkipSelf() private roomsService: RoomsService) { }
 

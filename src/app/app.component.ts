@@ -7,6 +7,7 @@ import { EmployeeComponent } from "./employee/employee.component";
 import { LoggerService } from './logger.service';
 import { localStorageToken } from './localstorage.token';
 import { HttpClientModule } from '@angular/common/http';
+import { InitService } from './init.service';
 
 
 @Component({
@@ -26,8 +27,10 @@ export class AppComponent implements OnInit {
 
 
   constructor(@Optional() private loggerService: LoggerService, 
-  @Inject(localStorageToken) private localStorage: Storage){
-
+  @Inject(localStorageToken) private localStorage: any,
+  // private initService: InitService
+  ){
+    // console.log(initService.config)
   }
   ngOnInit(): void {
     this.loggerService?.log('AppComponent.ngOnInit()')
