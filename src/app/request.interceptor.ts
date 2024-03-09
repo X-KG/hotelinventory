@@ -1,12 +1,12 @@
+import { Injectable } from '@angular/core';
 import {
   HttpEvent,
   HttpHandler,
-  HttpHeaderResponse,
   HttpHeaders,
+  HttpInterceptor,
   HttpInterceptorFn,
   HttpRequest,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export const requestInterceptor: HttpInterceptorFn = (req, next) => {
@@ -14,7 +14,7 @@ export const requestInterceptor: HttpInterceptorFn = (req, next) => {
 };
 
 @Injectable()
-export class RequestInterceptor {
+export class RequestInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(
@@ -25,7 +25,7 @@ export class RequestInterceptor {
 
     if (request.method === 'POST') {
       const newRequest = request.clone({
-        headers: new HttpHeaders({ token: '123456newtoken' }),
+        headers: new HttpHeaders({ 'token': '123456newtoken' }),
       });
       return next.handle(newRequest);
     }

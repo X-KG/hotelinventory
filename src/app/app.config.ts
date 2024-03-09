@@ -4,17 +4,13 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { RequestInterceptor } from './request.interceptor';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
-
-
-
-
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(), {
+  providers: [provideRouter(routes), provideClientHydration(), provideHttpClient(), {
     provide: HTTP_INTERCEPTORS,
     useClass: RequestInterceptor,
     multi: true,
-  }]
+  }, provideAnimationsAsync()]
 };

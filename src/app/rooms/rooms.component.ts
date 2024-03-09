@@ -12,7 +12,8 @@ import { Observable, Subject, Subscription, catchError, map, of } from 'rxjs';
   standalone: true,
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.scss',
-  imports: [DatePipe, UpperCasePipe, LowerCasePipe, TitleCasePipe, AsyncPipe, CurrencyPipe, PercentPipe, JsonPipe, DecimalPipe, SlicePipe, RoomsListComponent, HeaderComponent, HttpClientModule]
+  imports: [DatePipe, UpperCasePipe, LowerCasePipe, TitleCasePipe, AsyncPipe, CurrencyPipe, PercentPipe, JsonPipe, DecimalPipe, SlicePipe, RoomsListComponent, HeaderComponent, HttpClientModule],
+  providers: [RoomsService, HttpClientModule]
 
 })
 export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterViewChecked, OnDestroy {
@@ -69,32 +70,30 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     map((rooms) => rooms.length)
   )
 
-  constructor(@SkipSelf() private roomsService: RoomsService) { }
+  constructor(
+    @SkipSelf() private roomsService: RoomsService,
+    
+    ) { }
 
   ngOnInit(): void {
 
 
-
-    this.roomsService.getPhotos().subscribe((event) => {
+    this.roomsService.getPhotos().subscribe(event => {
       switch (event.type) {
-        case HttpEventType.Sent: {
-          console.log('Request has been made!');
+        case HttpEventType.Sent:
+          console.log('Fake JSON API request has been made.');
           break;
-        }
-        case HttpEventType.ResponseHeader: {
-          console.log('Request Success!');
+        case HttpEventType.ResponseHeader:
+          console.log('Fake JSON API request success.');
           break;
-        }
-        case HttpEventType.DownloadProgress: {
-          this.totalBytes+= event.loaded;
+        case HttpEventType.DownloadProgress:
+          this.totalBytes += event.loaded;
+          console.log('Total Bytes', this.totalBytes);
           break;
-        }
-        case HttpEventType.Response: {
+        case HttpEventType.Response:
           console.log(event.body);
-        }
       }
     });
-
 
 
 
