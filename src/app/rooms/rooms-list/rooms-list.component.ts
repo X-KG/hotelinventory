@@ -2,12 +2,13 @@ import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy
 import { RoomList } from '../rooms';
 import { CurrencyPipe, DatePipe, DecimalPipe, JsonPipe, LowerCasePipe, PercentPipe, SlicePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'hinv-rooms-list',
   standalone: true,
-  imports: [DatePipe, UpperCasePipe, LowerCasePipe, TitleCasePipe, CurrencyPipe, PercentPipe, JsonPipe, DecimalPipe, SlicePipe, HttpClientModule],
+  imports: [DatePipe, UpperCasePipe, LowerCasePipe, TitleCasePipe, CurrencyPipe, PercentPipe, JsonPipe, DecimalPipe, SlicePipe, HttpClientModule, RouterLink],
   templateUrl: './rooms-list.component.html',
   styleUrl: './rooms-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
