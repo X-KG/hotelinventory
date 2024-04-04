@@ -23,9 +23,9 @@
         }
     </div>
 
-    <!-- <div>
-        <button (click)="addRoom()">Add Room</button>
-    </div> -->
+    <div>
+        <button routerLink="add">Add Room</button>
+    </div>
 
     
     @if(rooms$ | async){
@@ -57,3 +57,5 @@
     <h1>
         {{totalBytes}} loaded
     </h1>
+
+    <router-outlet></router-outlet>

@@ -6,13 +6,14 @@ import { HeaderComponent } from "../header/header.component";
 import { RoomsService } from './services/rooms.service';
 import { HttpClientModule, HttpEventType } from '@angular/common/http';
 import { Observable, Subject, Subscription, catchError, map, of } from 'rxjs';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'hinv-rooms',
   standalone: true,
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.scss',
-  imports: [DatePipe, UpperCasePipe, LowerCasePipe, TitleCasePipe, AsyncPipe, CurrencyPipe, PercentPipe, JsonPipe, DecimalPipe, SlicePipe, RoomsListComponent, HeaderComponent, HttpClientModule],
+  imports: [DatePipe, UpperCasePipe, LowerCasePipe, TitleCasePipe, AsyncPipe, CurrencyPipe, PercentPipe, JsonPipe, DecimalPipe, SlicePipe, RoomsListComponent, HeaderComponent, HttpClientModule, RouterOutlet, RouterLink],
   providers: [RoomsService, HttpClientModule]
 
 })

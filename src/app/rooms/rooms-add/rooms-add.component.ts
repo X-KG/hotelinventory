@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { RoomList } from '../rooms';
 import { JsonPipe } from '@angular/common';
 import { RoomsService } from '../services/rooms.service';
@@ -27,9 +27,19 @@ export class RoomsAddComponent {
 
   constructor(private roomsService: RoomsService) {}
 
-  AddRoom() {
-    this.roomsService
-      .addRoom(this.room)
-      .subscribe((data) => (this.successMessage = 'Room added successfully'));
+  AddRoom(roomsForm: NgForm) {
+    this.roomsService.addRoom(this.room).subscribe((data) => {
+      this.successMessage = 'Room added successfully';
+      roomsForm.resetForm({
+        roomNumber: '',
+        roomType: '',
+        amenities: '',
+        price: 0,
+        photos: '',
+        checkinTime: new Date(),
+        checkoutTime: new Date(),
+        rating: 0,
+      });
+    });
   }
 }
